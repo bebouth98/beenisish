@@ -65,6 +65,8 @@ while True:
             play()
         else:
             print("nothing to skip")
+    if req == "!done":
+        break;
 
 
 
