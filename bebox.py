@@ -15,7 +15,9 @@ def addqueu(search):
     link = "https://www.youtube.com/watch?v=" + tmpid
     queue.append(link)
     print(link + "has been added to queue")
-
+def play():
+    print("playing " + queue[0])
+    webbrowser.open(queue[0])
 def isPlaying(link, tic):
     vid = pafy.new(link)
     toc = tic + vid.length
@@ -32,13 +34,11 @@ while True:
         if first:
             tic = int(time.perf_counter())
             first = False
-            print("playing " + queue[0])
-            webbrowser.open(queue[0])
+            play()
         elif len(queue) > 1 and isPlaying(queue[0], tic):
             tic = int(time.perf_counter())
             queue.pop(0)
-            print("playing" + queue[0])
-            webbrowser.open(queue[0])
+            play()
         else:
             print("song still playing")
     inp = input("Enter Song Request with !song:")
@@ -48,9 +48,24 @@ while True:
         if len(search) == 0:
             print("must add song request after !song")
             continue
-        addqueu(search)
-        if not gotFirst:
-            first = True
-            gotFirst = True
+        else:
+            addqueu(search)
+            if not gotFirst:
+                first = True
+                gotFirst = True
+    if req == "!skip":
+        if len(queue) == 1:
+            queue.pop(0)
+            tic = int(time.perf_counter())
+            gotFirst = False
+            first = False
+        elif len(queue) > 1:
+            tic = int(time.perf_counter())
+            queue.pop(0)
+            play()
+        else:
+            print("nothing to skip")
+
+
 
 
