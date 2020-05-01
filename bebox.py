@@ -6,7 +6,7 @@ import webbrowser
 queue = []
 pafy.set_api_key("AIzaSyAy2195YHslXWtjZY-0W_SdmVscXVzYL2Y")
 
-def addqueu(search):
+def addqueue(search):
     os.system('youtube-dl -j --dump-json "ytsearch1:{0}" > json.txt'.format(search))
     file = open('json.txt', "r")
     lines = file.readlines()
@@ -49,7 +49,7 @@ while True:
             print("must add song request after !song")
             continue
         else:
-            addqueu(search)
+            addqueue(search)
             if not gotFirst:
                 first = True
                 gotFirst = True
